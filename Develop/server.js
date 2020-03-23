@@ -22,7 +22,9 @@ const db = require('./models')
 
 //routes
 app.use(require("./public/api.js"));
-app.use(require("./html-routes"));
+
+/////Inserting data into Mongo/////
+
 
 app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}!`)
