@@ -42,7 +42,18 @@ const UserSchema = new Schema(
             virtuals: true
         }
     }
-)
+);
+
+/// This adds on to the property of the schema////
+UserSchema.virtual('Duration').get(function(){
+    ///bring the array of exercies to the sum of the duration///
+    return this.exercises.reduce((total, exercises) => {
+ return total + exercises.duration;
+}, 0)
+});
+
+
+
 
 
 

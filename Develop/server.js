@@ -1,15 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require('morgan');
-const mongojs = require('mongojs')
+const mongojs = require('mongojs');
+const path = require('path');
+
+const app = express();
+
+app.use(logger('dev'));
+
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+const User = require("./models/tracker.js")
 const app = express();
-const db = require("./models")
 
-
-app.use(logger('dev'));
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -17,23 +23,22 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const PORT = process.env.PORT || 3000;
-const databaseUrl = 'exeercises';
-const collections = ['type', 'name', 'duration', 'weight', 'reps', 'sets', 'distance']
-
-const db = mongojs(databaseUrl, collections);
+mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/userdb", { useNewUrlParser: true});
 
 
 
-db.on('error', function(error){
-console.log('Database Error:', error);
-})
 
-const User = require('./models/tracker')
+
 //routes
 app.use(require("./public/api.js"));
 
 /////Inserting data into Mongo/////
+
+
+express.get("/", (req, res) => {
+    res.status(200).sendFile("index.html");
+})
+
 
 
 app.listen(PORT, () => {
