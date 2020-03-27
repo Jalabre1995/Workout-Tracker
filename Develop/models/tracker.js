@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema
-const UserSchema = new Schema(
+const workoutSchema = new Schema(
     {
         day: {
             type: Date,
@@ -45,7 +45,7 @@ const UserSchema = new Schema(
 );
 
 /// This adds on to the property of the schema////
-UserSchema.virtual('Duration').get(function(){
+workoutSchema.virtual('Duration').get(function(){
     ///bring the array of exercies to the sum of the duration///
     return this.exercises.reduce((total, exercises) => {
  return total + exercises.duration;
@@ -80,6 +80,6 @@ UserSchema.virtual('Duration').get(function(){
 
 
 
-const User = mongoose.model("User", UserSchema);
+const workout = mongoose.model("User", workoutSchema);
 
-module.exports = User;
+module.exports = workout;

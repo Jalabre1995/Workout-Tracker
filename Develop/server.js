@@ -13,7 +13,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-const User = require("./models/tracker.js")
+const workout = require("./models/tracker.js")
 const app = express();
 
 
