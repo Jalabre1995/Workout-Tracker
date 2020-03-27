@@ -1,4 +1,6 @@
-var db = require('../models');
+var db = require('./models');
+const mongojs = require('mongojs');
+
 
 module.exports = (app => {
     ///Used by the api.js to get the last workout///
@@ -31,6 +33,7 @@ app.put('/api/workouts/:id', ({body, params }, res) => {
     console.log(body, params);
     const workoutId = params.id;
     let savedExercises = [];
+    db.workout.insert(savedExercises, workoutId)
 });
 
 ///Ge the current saved exercises/////
@@ -45,6 +48,7 @@ db.workout.find({_id:workoutId})
 .catch(err => {
     res.json(err);
 });
+
 
 
 ////Update a workout//////
@@ -66,3 +70,19 @@ app.get('/api/workouts/range', (req, res) => {
         res.json(err);
     })
 } )
+
+///Deleting a  exercise ////
+app.delete('/delete/:id', (req, res) => {
+    db.workout.remove(
+        {
+            _id: mongojs.OnjectID(req.params.id)
+        },
+        (error, data) => {
+            if(error) {
+                res.send(error);
+            }else{
+                res.send(data);
+            }
+        }
+    )
+})

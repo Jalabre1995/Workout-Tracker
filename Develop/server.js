@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require('morgan');
-const mongojs = require('mongojs');
+
 
 
 const app = express();
@@ -18,13 +18,19 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 
+
 app.use(express.static("public"));
 
+const databaseUrl = "tracker";
+const collections = ["workouts"];
+
+const db = mongo.js(databaseUrl, collections)
+
+db.on('error', error => {
+    console.log('Database Error: ', error);
+})
+
 mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/workout", { useNewUrlParser: true});
-
-const db = require('./models')
-
-
 
 
 
