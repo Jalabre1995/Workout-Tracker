@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require('morgan');
 const mongojs = require('mongojs');
-const path = require('path');
+
 
 const app = express();
 
@@ -13,9 +13,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-const workout = require("./models/tracker.js")
-const app = express();
-
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -23,14 +20,17 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/userdb", { useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/workout", { useNewUrlParser: true});
+
+const db = require('./models')
 
 
 
 
 
 //routes
-app.use(require("./public/api.js"));
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 /////Inserting data into Mongo/////
 
