@@ -1,8 +1,8 @@
-var db = require('./models');
+
 const mongojs = require('mongojs');
 
 
-module.exports = (app => {
+module.exports = app => {
     ///Used by the api.js to get the last workout///
     app.get('/api/workouts', (req, res) => {
         db.tracker.find({})
@@ -13,7 +13,7 @@ module.exports = (app => {
             res.json(err);
         })
     })
-});
+
 
 ////Creates a new workout in the database/////
 app.post('/api/workouts', async(req, res)=> {
@@ -37,7 +37,6 @@ app.put('/api/workouts/:id', ({body, params }, res) => {
 });
 
 ///Ge the current saved exercises/////
-
 db.workout.find({_id:workoutId})
 .then(dbWorkout => {
     savedExercises = dbWorkout[0].exercises;
@@ -86,3 +85,4 @@ app.delete('/delete/:id', (req, res) => {
         }
     )
 })
+}

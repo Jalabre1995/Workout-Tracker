@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require('morgan');
-
+const mongojs = require('mongojs');
 
 
 const app = express();
@@ -24,7 +24,8 @@ app.use(express.static("public"));
 const databaseUrl = "tracker";
 const collections = ["workouts"];
 
-const db = mongo.js(databaseUrl, collections)
+const db = mongojs(databaseUrl, collections)
+
 
 db.on('error', error => {
     console.log('Database Error: ', error);
@@ -37,6 +38,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/workout", { useN
 //routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+require("./models/tracker.js")
 
 /////Inserting data into Mongo/////
 
