@@ -52,7 +52,7 @@ db.workout.find({_id:workoutId})
 
 ////Update a workout//////
 udateWorkout(exercises => {
-    db.Workout.findIdAndUpdate(workoutId, {exercises: exercises}, (err,doc => {
+    db.workout.findIdAndUpdate(workoutId, {exercises: exercises}, (err,doc => {
         if(err) {
             console.log(err);
         }
