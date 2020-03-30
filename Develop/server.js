@@ -30,6 +30,7 @@ app.use(require("./routes/view.js"));
 
 
 /////Inserting data into Mongo/////
+///Creating a workout//////
 app.post('/api/workouts', (req, res) => {
     Workout.create({})
     .then(dbWorkout => {
@@ -62,8 +63,8 @@ Workout.findByIdAndUpdate(
 //// Retreiving a exercise from the database///
 app.get('/api/workouts', (req, res) => {
     Workout.find()
-    .then(dbWorkout => {
-        res.json(dbWorkout);
+    .then(dbWorkouts => {
+        res.json(dbWorkouts);
     })
     .catch(err => {
         res.json(err);
