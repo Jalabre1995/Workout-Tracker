@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const logger = require('morgan');
 const Workout = require('./models/tracker.js')
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const db = require('./models');
 
@@ -112,4 +112,5 @@ app.listen(PORT, () => {
 });
 
 
-module.exports = app
+
+module.exports = express
