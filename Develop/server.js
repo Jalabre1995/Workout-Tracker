@@ -25,8 +25,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/workout", { useN
 
 
 //routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
 require("./models/tracker.js")
 
 /////Inserting data into Mongo/////
