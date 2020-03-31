@@ -21,7 +21,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongod://lcoalhost/workout", { useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://workout:password23@ds225253.mlab.com:25253/heroku_9wwtcqtb", { useNewUrlParser: true});
+//Local Host 'mongod://localhost/workout'
 
 
 
