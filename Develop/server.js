@@ -36,6 +36,7 @@ app.post('/api/workouts', (req, res) => {
     db.Workout.create(req.body)
     .then(done => {
         res.json(done);
+        console.log(req.body)
     })
     .catch(err => {
         res.json(err);
@@ -52,6 +53,8 @@ Workout.findByIdAndUpdate(
     { new: true, runValidators: true}
 ).then(dbWorkout => {
     res.json(dbWorkout);
+    console.log(dbWorkout)
+    console.log(params.id);
 })
 .catch(err => {
     res.json(dbWorkout);
@@ -66,6 +69,7 @@ app.get('/api/workouts', (req, res) => {
     db.Workout.find({})
     .then(dbWorkout => {
         res.json(dbWorkout);
+        console.log(dbWorkout);
     })
     .catch(err => {
         res.json(err);
@@ -79,6 +83,7 @@ app.put('/api/workouts/:id', (req, res) => {
     {'exercises': req.body}})
     .then(dbUpdate => {
         res.json(dbUpdate);
+        console.log(dbUpdate)
     })
     .catch(error => {
         res.json(error);
@@ -90,10 +95,12 @@ app.put('/api/workouts/:id', (req, res) => {
 
 
 ///Get the range for all the workouts/////
-app.get("/api/workouts/range", (req, res) => {
+app.get(`/api/workouts/range`, (req, res) => {
    db.Workout.find({})
-   .then(dbRnages => {
-       res.json(dbRnages)
+   .then(dbRanges => {
+       res.json(dbRanges)
+       console.log(dbRanges)
+       return this.json
    })
    .catch(error => {
        res.json(error);
@@ -105,6 +112,7 @@ app.delete('/api/workouts', ({body}, res) => {
     Workout.findByIdAndDelete(body.id)
     .then(() => {
         res.json(true);
+        console.log(body.id)
     })
     .catch(err => {
         res.json(err);
