@@ -48,7 +48,7 @@ Workout.findByIdAndUpdate(
     params.id,
     { $push: { exercise: body} },
     // run some validations to make sure our schema requirements are met//
-    { new: true, runValidators: ture}
+    { new: true, runValidators: true}
 ).then(dbWorkout => {
     res.json(dbWorkout);
 })
@@ -69,15 +69,6 @@ app.get('/api/workouts', (req, res) => {
     .catch(err => {
         res.json(err);
     });
-});
-
-///Adding a exercise to the database//////
-
-app.put('/api/workouts/:id', ({body, params }, res) => {
-console.log(body, params);
-const workoutId = params.id;
-let savedExercises = [];
-db.workout.insert(savedExercises, workoutId)
 });
 
 
